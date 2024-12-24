@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: blog-app
+server:
+    port : 4343
+

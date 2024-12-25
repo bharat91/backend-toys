@@ -1,5 +1,9 @@
 package com.learning.blog_app.security;
 
+import com.learning.blog_app.security.jwt.JwtAuthenticationFilter;
+import com.learning.blog_app.security.jwt.JwtAuthenticationManager;
+import com.learning.blog_app.security.jwt.JwtService;
+import com.learning.blog_app.service.UserService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,6 +16,12 @@ import org.springframework.security.web.authentication.AnonymousAuthenticationFi
 @Configuration
 @EnableWebSecurity
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    public AppSecurityConfig(JwtService jwtService, UserService userService) {
+        this.jwtAuthenticationFilter = new JwtAuthenticationFilter(new JwtAuthenticationManager(jwtService,userService));
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

@@ -1,6 +1,7 @@
 package com.learning.blog_app.controller;
 
 import com.learning.blog_app.dto.CreateUserDto;
+import com.learning.blog_app.dto.LoginUserDto;
 import com.learning.blog_app.dto.UserDetailsDto;
 import com.learning.blog_app.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -36,5 +37,13 @@ public class UserController {
 
         UserDetailsDto res = userService.createUser(createUser);
         return ResponseEntity.created(URI.create("/users/" + res.getId())).body(res);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<UserDetailsDto> verifyUser(
+            @RequestBody LoginUserDto request
+    ) {
+        UserDetailsDto verifiedUser = userService.verifyUser(request);
+        return ResponseEntity.ok(verifiedUser);
     }
 }

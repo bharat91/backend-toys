@@ -16,12 +16,15 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(name = "username")
+    @Column(unique = true, nullable = false)
     private String username;
 
-    @Column(name = "emailAddress")
+    @Column(unique = true, nullable = false)
     private String email;
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "password", nullable = false)
+    private String password;
 }
